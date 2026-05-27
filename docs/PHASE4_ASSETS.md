@@ -1,6 +1,6 @@
-# Phase 4 Assets — Drafts While Live URL / Video Are Pending
+# Phase 4 Assets — Drafts While Video Is Pending
 
-Purpose: prepare the Phase 4 submission copy that does not require the final live deployment/video links yet.
+Purpose: prepare the Phase 4 submission copy. The canonical live URL is finalized as `https://auralisfinance.xyz` and is filled in everywhere below. Demo-video and X-thread links remain as placeholders until the recordings and final posts exist.
 
 Related docs: [Submission Checklist](./SUBMISSION_CHECKLIST.md), [Pitch](./PITCH.md), [Judge Guide](./JUDGE_GUIDE.md), [Video Script](./video-script.md), [Contracts](./CONTRACTS.md).
 
@@ -25,11 +25,10 @@ Use `auralisfinance.xyz` everywhere in public copy once DNS is live. There is no
 
 ## Step 4.2 — X / Twitter thread draft
 
-Status: copy-ready draft, **do not post until live URL + demo video links are filled**.
+Status: copy-ready draft, **do not post until demo video links are filled**.
 
-Replace placeholders before posting:
+Remaining placeholders:
 
-- `[LIVE_APP_URL]` → `https://auralisfinance.xyz`
 - `[DEMO_VIDEO_URL]` → YouTube unlisted demo video
 - `[SHORT_CLIP_URL]` → 30–60s short clip if posted separately
 
@@ -45,7 +44,7 @@ Most RWA apps show yield. Auralis answers the missing questions: what is the ris
 **2/10**
 The hook: we rated Mantle RWAs in a public explorer — no wallet needed.
 
-Open `[LIVE_APP_URL]/ratings` and check the asset ratings, risk scores, methodology version, and proof framing.
+Open `https://auralisfinance.xyz/ratings` and check the asset ratings, risk scores, methodology version, and proof framing.
 
 This is designed as infrastructure other Mantle apps can consume.
 
@@ -96,7 +95,7 @@ Policy Guard: `0xFaD41c7d7e777853CF7aC04641Df0D88B27A7b0E`
 **10/10**
 Links:
 
-Live app: `[LIVE_APP_URL]`
+Live app: `https://auralisfinance.xyz`
 Demo video: `[DEMO_VIDEO_URL]`
 GitHub: https://github.com/talk2francis/Auralis-Finance
 Judge guide: https://github.com/talk2francis/Auralis-Finance/blob/main/docs/JUDGE_GUIDE.md
@@ -110,28 +109,28 @@ Auralis is built around one core design rule: AI explains, deterministic code de
 
 That keeps the UX intelligent without giving an AI agent custody or autonomous execution rights.
 
-`[LIVE_APP_URL]`
+`https://auralisfinance.xyz`
 
 **Follow-up 2 — ratings spotlight**
 The public ratings explorer is the viral surface: Mantle RWA ratings with no wallet required.
 
 Each rating includes grade, risk score, methodology version, and proof framing — built to be consumed by users, wallets, and DeFi apps.
 
-`[LIVE_APP_URL]/ratings`
+`https://auralisfinance.xyz/ratings`
 
 **Follow-up 3 — compliance spotlight**
 Compliance should not be hidden behind PDFs.
 
 Auralis turns wallet eligibility into a structured, explainable, and attestable workflow: scan → verdict → report hash → Mantle proof.
 
-`[LIVE_APP_URL]/app/compliance`
+`https://auralisfinance.xyz/app/compliance`
 
 **Follow-up 4 — methodology spotlight**
 Auralis scores RWA risk across seven dimensions: asset, issuer, liquidity, peg, oracle, contract, and concentration.
 
 The goal is not hype — it is repeatable risk methodology that makes tokenized assets easier to evaluate.
 
-`[LIVE_APP_URL]/methodology`
+`https://auralisfinance.xyz/methodology`
 
 **Follow-up 5 — business vision**
 Auralis can become paid infrastructure for the Mantle RWA ecosystem:
@@ -142,7 +141,7 @@ Auralis can become paid infrastructure for the Mantle RWA ecosystem:
 
 The product is revenue-first, not token-first.
 
-`[LIVE_APP_URL]/business`
+`https://auralisfinance.xyz/business`
 
 ## Step 4.3 — DoraHacks BUIDL submission draft
 
@@ -193,7 +192,7 @@ Justification: Auralis does not tokenize a new asset. Instead, it solves the pos
 
 ### Links
 
-- Live app: `[LIVE_APP_URL]` — intended canonical URL: `https://auralisfinance.xyz`
+- Live app: `https://auralisfinance.xyz`
 - GitHub: https://github.com/talk2francis/Auralis-Finance
 - Demo video: `[DEMO_VIDEO_URL]`
 - X thread: `[X_THREAD_URL]`
