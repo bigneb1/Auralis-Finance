@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <rect width="256" height="256" rx="56" fill="#0B1220"/>
+  <defs>
+    <linearGradient id="ap-arc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2DD4B5"/>
+      <stop offset="100%" stop-color="#14B8A3"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linecap="round" fill="none">
+    <path d="M 41 84 A 100 100 0 0 1 215 84" stroke="url(#ap-arc)" stroke-width="8"/>
+    <path d="M 50 89 A 90 90 0 0 1 206 89" stroke="#14B8A3" stroke-opacity="0.6" stroke-width="5"/>
+    <path d="M 59 94 A 80 80 0 0 1 197 94" stroke="#14B8A3" stroke-opacity="0.35" stroke-width="3"/>
+  </g>
+  <g stroke="#E8ECF2" stroke-linecap="round" fill="none">
+    <path d="M 76 196 L 118 90" stroke-width="14"/>
+    <path d="M 180 196 L 138 90" stroke-width="14"/>
+    <path d="M 98 150 L 158 150" stroke-width="12"/>
+  </g>
+  <circle cx="128" cy="88" r="12" fill="#D4A35A"/>
+</svg>
