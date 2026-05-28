@@ -10,5 +10,6 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono"
 export const metadata: Metadata = { title: "Auralis Finance", description: "AI risk and compliance for Mantle RWAs" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body className={`${newsreader.variable} ${inter.variable} ${geistMono.variable} font-sans`}><Providers>{children}</Providers></body></html>;
+  const fontVariables = `${newsreader.variable} ${inter.variable} ${geistMono.variable}`;
+  return <html lang="en" className={fontVariables}><body className={`${fontVariables} font-sans`}><Providers>{children}</Providers></body></html>;
 }

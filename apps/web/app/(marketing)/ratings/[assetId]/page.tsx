@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 
 export default async function PublicRatingDetail({ params }: { params: Promise<{ assetId: string }> }) {
   const { assetId } = await params;
-  const rating = await getRatingWithAI(assetId);
+  const rating = await getRatingWithAI(decodeURIComponent(assetId));
   if (!rating) notFound();
   const values = Object.values(rating.dimensionScores);
   return <main className="mx-auto max-w-6xl px-4 py-16">
@@ -29,9 +29,9 @@ export default async function PublicRatingDetail({ params }: { params: Promise<{
       <Card><CardHeader><CardTitle>Rating seal</CardTitle></CardHeader><CardContent className="grid place-items-center gap-5"><RatingSeal grade={rating.grade} size="lg"/><RiskRadar values={values}/></CardContent></Card>
     </section>
     <section className="mt-8 grid gap-4 md:grid-cols-2">
-      {Object.entries(rating.dimensionScores).map(([key, score]) => <Card key={key}><CardContent className="p-4"><div className="flex items-center justify-between"><h2 className="font-medium capitalize">{key.replace(/([A-Z])/g, " $1")}</h2><span className="font-display text-2xl">{score}</span></div><p className="mt-2 text-sm text-[var(--text-secondary)]">Risk contribution from the {key.replace(/([A-Z])/g, " $1").toLowerCase()} dimension.</p></CardContent></Card>)}
+      {Object.entries(rating.dimensionScores).map(([key, score]) => <Card key={key}><CardContent className="p-4"><div className="flex items-center justify-between"><h2 className="font-display text-xl font-normal capitalize tracking-[-0.01em]">{key.replace(/([A-Z])/g, " $1")}</h2><span className="font-display text-2xl">{score}</span></div><p className="mt-2 text-sm text-[var(--text-secondary)]">Risk contribution from the {key.replace(/([A-Z])/g, " $1").toLowerCase()} dimension.</p></CardContent></Card>)}
     </section>
-    <Card className="mt-8"><CardHeader><CardTitle>Verifiable proof</CardTitle></CardHeader><CardContent className="space-y-3 text-sm"><p>Rating hash: <code>{rating.ratingHash}</code></p><p>Verify through <code>AuralisRatingRegistry.verifyRating(assetId, ratingHash)</code> on Mantle mainnet.</p><p className="text-[var(--text-secondary)]">Counterfactual: {rating.counterfactual}</p></CardContent></Card>
+    <Card className="mt-8"><CardHeader><CardTitle>Verifiable proof</CardTitle></CardHeader><CardContent className="space-y-3 text-sm"><p>Rating hash: <code className="break-all font-mono">{rating.ratingHash}</code></p><p>Verify through <code className="break-all font-mono">AuralisRatingRegistry.verifyRating(assetId, ratingHash)</code> on Mantle mainnet.</p><p className="text-[var(--text-secondary)]">Counterfactual: {rating.counterfactual}</p></CardContent></Card>
   </main>;
 }
 
