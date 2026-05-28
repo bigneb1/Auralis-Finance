@@ -4,10 +4,11 @@ import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button, ConfidenceMeter } from "@auralis/ui";
+import { AIProvenance, type AIProvenanceInfo } from "./AIProvenance";
 
 const quickActions = ["Explain this screen", "Check compliance next", "Why might this be blocked?"];
 
-type Reply = { summary: string; actions: string[]; outcome: string; reasoningFactors: string[]; caveats: string[]; aiProvenance?: { modelId?: string } };
+type Reply = { summary: string; actions: string[]; outcome: string; reasoningFactors: string[]; caveats: string[]; aiProvenance?: AIProvenanceInfo };
 
 export function CopilotWidget() {
   const pathname = usePathname();
@@ -74,6 +75,6 @@ export function CopilotWidget() {
 }
 
 function StructuredReply({ reply }: { reply: Reply }) {
-  return <div className="space-y-3"><ConfidenceMeter value={86} /><Block title="Summary" lines={[reply.summary]} /><Block title="Actions" lines={reply.actions} /><Block title="Outcome" lines={[reply.outcome]} /><Block title="Reasoning" lines={reply.reasoningFactors} /><Block title="Caveats" lines={reply.caveats} /></div>;
+  return <div className="space-y-3"><ConfidenceMeter value={86} /><Block title="Summary" lines={[reply.summary]} /><Block title="Actions" lines={reply.actions} /><Block title="Outcome" lines={[reply.outcome]} /><Block title="Reasoning" lines={reply.reasoningFactors} /><Block title="Caveats" lines={reply.caveats} /><AIProvenance provenance={reply.aiProvenance}/></div>;
 }
 function Block({ title, lines }: { title: string; lines: string[] }) { return <section><h3 className="font-medium">{title}</h3><ul className="mt-1 list-disc pl-5 text-[var(--text-secondary)]">{lines.length ? lines.map((line) => <li key={line}>{line}</li>) : <li>No action required.</li>}</ul></section>; }

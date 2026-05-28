@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getRatingWithAI, getRatings } from "../../../../lib/api";
 import { Card, CardContent, CardHeader, CardTitle, RatingSeal, RiskRadar } from "@auralis/ui";
+import { AIProvenance } from "../../../../components/AIProvenance";
 
 export async function generateStaticParams() {
   const ratings = await getRatings();
@@ -31,7 +32,7 @@ export default async function PublicRatingDetail({ params }: { params: Promise<{
     <section className="mt-8 grid gap-4 md:grid-cols-2">
       {Object.entries(rating.dimensionScores).map(([key, score]) => <Card key={key}><CardContent className="p-4"><div className="flex items-center justify-between"><h2 className="font-display text-xl font-normal capitalize tracking-[-0.01em]">{key.replace(/([A-Z])/g, " $1")}</h2><span className="font-display text-2xl">{score}</span></div><p className="mt-2 text-sm text-[var(--text-secondary)]">Risk contribution from the {key.replace(/([A-Z])/g, " $1").toLowerCase()} dimension.</p></CardContent></Card>)}
     </section>
-    <Card className="mt-8"><CardHeader><CardTitle>Verifiable proof</CardTitle></CardHeader><CardContent className="space-y-3 text-sm"><p>Rating hash: <code className="break-all font-mono">{rating.ratingHash}</code></p><p>Verify through <code className="break-all font-mono">AuralisRatingRegistry.verifyRating(assetId, ratingHash)</code> on Mantle mainnet.</p><p className="text-[var(--text-secondary)]">Counterfactual: {rating.counterfactual}</p></CardContent></Card>
+    <Card className="mt-8"><CardHeader><CardTitle>Verifiable proof</CardTitle></CardHeader><CardContent className="space-y-3 text-sm"><p>Rating hash: <code className="break-all font-mono">{rating.ratingHash}</code></p><p>Verify through <code className="break-all font-mono">AuralisRatingRegistry.verifyRating(assetId, ratingHash)</code> on Mantle mainnet.</p><p className="text-[var(--text-secondary)]">Counterfactual: {rating.counterfactual}</p><AIProvenance provenance={rating.aiProvenance}/></CardContent></Card>
   </main>;
 }
 

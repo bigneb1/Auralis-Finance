@@ -71,3 +71,14 @@ create table if not exists policies (
   tx_hash text,
   updated_at timestamptz default now()
 );
+
+create table if not exists ai_cache (
+  cache_key text primary key,
+  task text not null,
+  prompt_hash text not null,
+  response_hash text not null,
+  response_json jsonb not null,
+  model_id text not null,
+  created_at timestamptz default now()
+);
+create index if not exists ai_cache_task_created_idx on ai_cache(task, created_at desc);

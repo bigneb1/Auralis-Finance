@@ -1,5 +1,7 @@
 export type ModelResponse = { text: string; modelId: string };
 
+const ELFA_MODEL_ID = "elfa-default";
+
 export async function callJsonModel(prompt: string): Promise<ModelResponse> {
   if (process.env.ELFA_API_KEY) {
     const out = await callElfa(prompt).catch(() => undefined);
@@ -13,8 +15,16 @@ export async function callJsonModel(prompt: string): Promise<ModelResponse> {
 }
 
 async function callElfa(prompt: string): Promise<ModelResponse> {
-  // TODO(real-data): confirm ELFA chat endpoint when credit access is active.
-  throw new Error(`ELFA unavailable for prompt length ${prompt.length}`);
+  const res = await fetch("https://api.elfa.ai/v2/chat", {
+    method: "POST",
+    headers: { "x-elfa-api-key": process.env.ELFA_API_KEY ?? "", "Content-Type": "application/json" },
+    body: JSON.stringify({ message: prompt, analysisType: "chat", speed: process.env.ELFA_SPEED ?? "expert" }),
+  });
+  if (!res.ok) throw new Error(`ELFA failed: ${res.status}`);
+  const json = await res.json() as { success?: boolean; data?: { message?: string } };
+  const message = json.data?.message;
+  if (!json.success || !message) throw new Error("ELFA returned an empty response");
+  return { text: message, modelId: ELFA_MODEL_ID };
 }
 
 async function callOpenAI(prompt: string): Promise<ModelResponse> {
