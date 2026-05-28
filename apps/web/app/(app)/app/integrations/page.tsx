@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Badge, Button, Card, CardContent, CardHeader, CardTitle, StateWrapper } from "@auralis/ui";
+import { Button, Card, CardContent, CardHeader, CardTitle, StateWrapper, StatusPill } from "@auralis/ui";
 
 type Status = "operational" | "degraded" | "not_configured";
 type Health = {
@@ -13,10 +13,10 @@ type Health = {
   time: string;
 };
 
-const tone: Record<Status, string> = {
-  operational: "border-emerald-200 bg-emerald-50 text-[var(--emerald)]",
-  degraded: "border-amber-200 bg-amber-50 text-[var(--amber)]",
-  not_configured: "border-[var(--border)] bg-[var(--surface-muted)] text-[var(--text-secondary)]",
+const pillStatus: Record<Status, "operational" | "degraded" | "pending"> = {
+  operational: "operational",
+  degraded: "degraded",
+  not_configured: "pending",
 };
 
 export default function IntegrationsPage() {
@@ -50,7 +50,7 @@ export default function IntegrationsPage() {
   return <div className="space-y-6">
     <section className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
       <div>
-        <Badge>Phase 3.2</Badge>
+        <p className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--teal)]">Operational status</p>
         <h1 className="mt-3 font-display text-4xl text-[var(--ink)]">Integrations</h1>
         <p className="mt-2 max-w-3xl text-[var(--text-secondary)]">Live operational view for Auralis dependencies. Statuses are driven by <code>/api/health</code>, not hard-coded UI labels.</p>
       </div>
@@ -62,7 +62,7 @@ export default function IntegrationsPage() {
         <Card>
           <CardHeader><CardTitle>Connected services</CardTitle></CardHeader>
           <CardContent><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{orderedServices.map((service) => <article key={service.id} className="rounded-xl border border-[var(--border)] p-4">
-            <div className="flex items-start justify-between gap-3"><h2 className="font-medium">{service.label}</h2><span className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${tone[service.status]}`}>{service.status.replace("_", " ")}</span></div>
+            <div className="flex items-start justify-between gap-3"><h2 className="font-medium">{service.label}</h2><StatusPill status={pillStatus[service.status]}>{service.status.replace("_", " ")}</StatusPill></div>
             <p className="mt-2 text-sm text-[var(--text-secondary)]">{service.detail}</p>
             <p className="mt-3 text-xs text-[var(--text-secondary)]">Checked {new Date(service.checkedAt).toLocaleString()}</p>
           </article>)}</div></CardContent>
@@ -77,7 +77,7 @@ export default function IntegrationsPage() {
           </dl></CardContent></Card>
 
           <Card><CardHeader><CardTitle>System health</CardTitle></CardHeader><CardContent><ul className="space-y-3">{health.system.map((item) => <li key={item.label} className="rounded-xl border border-[var(--border)] p-3">
-            <div className="flex items-center justify-between gap-3"><span className="font-medium">{item.label}</span><span className={`rounded-full border px-2 py-0.5 text-[11px] ${tone[item.status]}`}>{item.status.replace("_", " ")}</span></div>
+            <div className="flex items-center justify-between gap-3"><span className="font-medium">{item.label}</span><StatusPill status={pillStatus[item.status]}>{item.status.replace("_", " ")}</StatusPill></div>
             <p className="mt-1 text-sm text-[var(--text-secondary)]">{item.detail}</p>
           </li>)}</ul></CardContent></Card>
 

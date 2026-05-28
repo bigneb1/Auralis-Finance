@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Badge, Button, Card, CardContent, CardHeader, CardTitle, StateWrapper } from "@auralis/ui";
+import { Button, Card, CardContent, CardHeader, CardTitle, StateWrapper, Switch } from "@auralis/ui";
 
 const demoWallet = "0x000000000000000000000000000000000000aAaA";
 const jurisdictions = ["NG", "EU", "US", "GB", "SG", "AE"];
@@ -46,7 +46,7 @@ export default function SettingsPage() {
 
   return <div className="space-y-6">
     <section>
-      <Badge>Phase 3.2</Badge>
+      <p className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--teal)]">Configuration</p>
       <h1 className="mt-3 font-display text-4xl text-[var(--ink)]">Settings</h1>
       <p className="mt-2 max-w-3xl text-[var(--text-secondary)]">Control the profile inputs that affect Auralis explanations, compliance checks, and policy recommendations. Jurisdiction changes explicitly trigger a compliance re-scan.</p>
     </section>
@@ -72,7 +72,7 @@ export default function SettingsPage() {
 
         <Card><CardHeader><CardTitle>Risk profile</CardTitle></CardHeader><CardContent><div className="grid gap-3 sm:grid-cols-3">{riskProfiles.map((profile) => <button key={profile} onClick={() => setRiskProfile(profile)} className={`rounded-xl border p-4 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--teal)] ${riskProfile === profile ? "border-[var(--teal)] bg-[var(--teal-wash)]" : "border-[var(--border)] hover:bg-[var(--surface-muted)]"}`}><span className="font-medium">{profile}</span><span className="mt-1 block text-xs text-[var(--text-secondary)]">Adjusts policy defaults and copilot explanations.</span></button>)}</div></CardContent></Card>
 
-        <Card><CardHeader><CardTitle>Notifications</CardTitle></CardHeader><CardContent className="grid gap-3">{Object.entries(notifications).map(([key, value]) => <label key={key} className="flex items-center justify-between rounded-xl border border-[var(--border)] p-3"><span className="capitalize">{key} alerts</span><input type="checkbox" checked={value} onChange={(event) => setNotifications((current) => ({ ...current, [key]: event.target.checked }))} /></label>)}</CardContent></Card>
+        <Card><CardHeader><CardTitle>Notifications</CardTitle></CardHeader><CardContent className="grid gap-3">{Object.entries(notifications).map(([key, value]) => <label key={key} className="flex items-center justify-between rounded-xl border border-[var(--border)] p-3"><span className="capitalize">{key} alerts</span><Switch checked={value} onChange={(event) => setNotifications((current) => ({ ...current, [key]: event.target.checked }))} /></label>)}</CardContent></Card>
       </div>
 
       <div className="space-y-5">

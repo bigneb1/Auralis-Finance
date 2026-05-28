@@ -1,0 +1,32 @@
+:root {
+  /* Auralis Finance — design tokens from design-reference/prototype.css */
+  --ink: #0B1220;
+  --paper: #FBFBF9;
+  --surface: #FFFFFF;
+  --surface-muted: #F4F5F3;
+  --border: #E4E6E2;
+  --text-secondary: #5B6472;
+  --teal: #0E9E8C;
+  --teal-wash: #EAF6F4;
+  --emerald: #0F9D58;
+  --amber: #D9870B;
+  --rose: #D64550;
+  --brass: #B08442;
+
+  --text: var(--ink);
+  --text-tertiary: #8C97A8;
+  --border-strong: #D5D8D2;
+
+  --font-display: var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
+  --font-ui: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --serif: var(--font-display);
+  --sans: var(--font-ui);
+  --mono: var(--font-mono);
+
+  --space-grid: 8px;
+  --radius-card: 14px;
+  --shadow-soft: 0 1px 2px rgba(11,18,32,0.04), 0 4px 12px rgba(11,18,32,0.06);
+  --shadow: var(--shadow-soft);
+  --hairline: 1px solid var(--border);
+}

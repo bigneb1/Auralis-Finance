@@ -25,7 +25,7 @@ export function TxButton({
   txHash?: `0x${string}`;
   onConfirmed?: () => void;
   className?: string;
-  variant?: "primary" | "secondary" | "ghost" | "teal";
+  variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
 }) {
   const [stage, setStage] = useState<TxStage>("idle");

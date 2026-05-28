@@ -12,7 +12,8 @@ export const auralisTokens = {
   rose: "#D64550",
   brass: "#B08442",
   radius: "14px",
-  shadow: "0 18px 48px rgba(11, 18, 32, 0.08)",
+  spaceGrid: "8px",
+  shadow: "0 1px 2px rgba(11,18,32,0.04), 0 4px 12px rgba(11,18,32,0.06)",
 } as const;
 
 export const cssVariables = `
@@ -30,10 +31,11 @@ export const cssVariables = `
   --rose: ${auralisTokens.rose};
   --brass: ${auralisTokens.brass};
   --radius-card: ${auralisTokens.radius};
+  --space-grid: ${auralisTokens.spaceGrid};
   --shadow-soft: ${auralisTokens.shadow};
-  --font-display: Newsreader, Georgia, serif;
-  --font-ui: Inter, ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-display: var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
+  --font-ui: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }`;
 
 export const tailwindPreset = {
@@ -56,11 +58,12 @@ export const tailwindPreset = {
       borderRadius: { card: "var(--radius-card)" },
       boxShadow: { soft: "var(--shadow-soft)" },
       fontFamily: {
-        display: ["Newsreader", "Georgia", "serif"],
-        ui: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["Geist Mono", "ui-monospace", "monospace"],
+        display: ["var(--font-display)"],
+        sans: ["var(--font-ui)"],
+        ui: ["var(--font-ui)"],
+        mono: ["var(--font-mono)"],
       },
-      spacing: { grid: "8px" },
+      spacing: { grid: "var(--space-grid)" },
     },
   },
 };
