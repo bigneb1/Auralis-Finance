@@ -1,11 +1,26 @@
 create table if not exists users (
   wallet_address text primary key,
+  chain_id integer,
   jurisdiction text,
   risk_profile text,
   mode text,
+  liquidity text,
+  max_drawdown text,
+  display_name text,
+  appearance text,
+  notifications jsonb,
   onboarding_done boolean default false,
-  created_at timestamptz default now()
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
 );
+
+alter table users add column if not exists chain_id integer;
+alter table users add column if not exists liquidity text;
+alter table users add column if not exists max_drawdown text;
+alter table users add column if not exists display_name text;
+alter table users add column if not exists appearance text;
+alter table users add column if not exists notifications jsonb;
+alter table users add column if not exists updated_at timestamptz default now();
 
 create table if not exists ratings (
   asset_id text primary key,
