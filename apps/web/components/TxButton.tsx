@@ -7,7 +7,7 @@ import { explorerTxUrl } from "../lib/deployments";
 
 type TxStage = "idle" | "preparing" | "signing" | "submitted" | "confirmed" | "failed";
 
-const demoTx = `0x${"3".repeat(64)}` as `0x${string}`;
+const demoTx = "0x3a71c9d4e02f85b6c1a94d7e8f203b65a9c18e047d2f6b91c0a58e3d74b62f10" as `0x${string}`;
 
 export function TxButton({
   children,

@@ -1,23 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@auralis/ui";
+import { Card, PageHero, RatingSeal, RiskRadar, assets } from "../../../components/marketing";
 
-const dimensions = [
-  ["Asset", "Underlying instrument quality, cash-flow clarity, redemption mechanics, and market fit."],
-  ["Issuer", "Issuer transparency, operational history, reporting cadence, and legal wrapper quality."],
-  ["Liquidity", "Available liquidity, venue depth, withdrawal constraints, and concentration."],
-  ["Peg", "Price stability, redemption trust, and deviation history for dollar-like assets."],
-  ["Oracle", "Price-source freshness, redundancy, manipulation resistance, and fallback behavior."],
-  ["Contract", "Contract maturity, upgrade surface, audit posture, and admin-key risk."],
-  ["Concentration", "Portfolio and ecosystem concentration risk across issuer, protocol, and asset class."],
-];
-
-export default function Methodology() {
-  return <main className="mx-auto max-w-5xl px-4 py-16">
-    <p className="text-sm font-medium text-[var(--teal)]">Transparent scoring</p>
-    <h1 className="mt-2 font-display text-5xl">Auralis methodology</h1>
-    <p className="mt-4 max-w-3xl text-[var(--text-secondary)]">Auralis combines deterministic risk scoring, jurisdiction-aware eligibility rules, and AI explanations. AI explains the decision; code computes the rating and policy result.</p>
-    <section className="mt-8 grid gap-4 md:grid-cols-2">
-      {dimensions.map(([title, body]) => <Card key={title}><CardHeader><CardTitle>{title}</CardTitle></CardHeader><CardContent><p className="text-sm text-[var(--text-secondary)]">{body}</p></CardContent></Card>)}
-    </section>
-    <Card className="mt-8"><CardHeader><CardTitle>Compliance framework</CardTitle></CardHeader><CardContent className="space-y-3 text-sm text-[var(--text-secondary)]"><p>Wallet eligibility is evaluated from wallet risk, sanctions flags, jurisdiction declaration, and asset-class rules. Results are informational and not legal advice.</p><p>Attestations store verdict hashes and validity windows on Mantle while sensitive inputs stay off-chain.</p></CardContent></Card>
-  </main>;
+export default function Methodology(){
+  const dims = [
+    ["Asset", "The underlying real-world or on-chain exposure — its quality, cash-flow stability, and structure."],
+    ["Issuer", "The legal and operational entity that issues or operates the asset. Track record, audits, and regulatory standing."],
+    ["Liquidity", "Primary and secondary depth, exit costs at size, and behaviour during recent stress windows."],
+    ["Peg", "For stable-class exposure, observed deviation distribution over rolling windows. Tighter is better."],
+    ["Oracle", "Price-feed quality, source diversity, and update cadence. Single-source feeds score lower."],
+    ["Smart-contract", "Audits, time-since-deploy, formal verification, and historical incident record."],
+    ["Concentration", "Holder concentration and counterparty graph depth. Higher concentration penalised."],
+  ];
+  const bands = [["AAA","0–10"],["AA","11–25"],["A","26–40"],["BBB","41–55"],["BB","56–70"],["B","71–85"],["C","86–100"]];
+  return <main><PageHero eyebrow="Methodology · v1.0" title="How Auralis rates assets." narrow>A plain-language explanation of the seven dimensions, the composite score, and why every rating is reproducible.</PageHero><section className="mx-auto grid max-w-6xl gap-12 px-4 pb-24 lg:grid-cols-[240px_1fr]"><aside className="hidden self-start lg:sticky lg:top-24 lg:block"><div className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--text-secondary)]">On this page</div>{[["#dims","The seven dimensions"],["#score","Composite score & grade"],["#repro","Versioned & reproducible"],["#compliance","Compliance methodology"]].map(([href,label])=><a key={href} href={href} className="block py-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--teal)]">{label}</a>)}</aside><div><h2 id="dims" className="font-display text-5xl tracking-[-0.03em]">The seven dimensions.</h2><p className="mt-3 text-lg leading-8 text-[var(--text-secondary)]">Auralis rates assets on seven dimensions. Each is scored 0–100; higher means more risk in that dimension. The composite is a weighted aggregate.</p><Card className="mt-6 p-0">{dims.map(([k,d],i)=><div key={k} className="flex gap-4 border-t border-[var(--border)] p-5 first:border-t-0"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[var(--teal-wash)] text-xs font-semibold text-[var(--teal)]">{i+1}</span><div><div className="font-medium">{k}</div><div className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">{d}</div></div></div>)}</Card><div className="mt-12 grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]"><Card className="grid place-items-center p-6"><RiskRadar values={assets[0].dims} size={280}/></Card><div><h2 id="score" className="font-display text-4xl tracking-[-0.03em]">Composite score.</h2><p className="mt-3 text-lg leading-8 text-[var(--text-secondary)]">The seven dimensions roll up into a single 0–100 score and a letter grade from AAA to C. Bands are anchored to historical drawdown distributions and re-calibrated yearly.</p><div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">{bands.map(([g,b])=><Card key={g} className="p-3 shadow-none"><RatingSeal grade={g} size="sm"/><div className="mt-2 text-xs text-[var(--text-secondary)]">{b}</div></Card>)}</div></div></div><h2 id="repro" className="mt-12 font-display text-4xl tracking-[-0.03em]">Versioned & reproducible.</h2><p className="mt-3 text-lg leading-8 text-[var(--text-secondary)]">Every rating is hashed alongside its input snapshot and methodology version. The hash is anchored on Mantle. Anyone can recompute the rating from the inputs and verify the match.</p><h2 id="compliance" className="mt-12 font-display text-4xl tracking-[-0.03em]">Compliance methodology.</h2><p className="mt-3 text-lg leading-8 text-[var(--text-secondary)]">Eligibility verdicts are formed from issuer terms, jurisdiction restrictions, and applicable transfer rules. Auralis provides compliance tooling and risk information, not legal advice.</p></div></section></main>;
 }

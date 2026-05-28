@@ -33,7 +33,7 @@ export default function CompliancePage() {
   const [flagsOpen, setFlagsOpen] = useState(true);
   const [mintOpen, setMintOpen] = useState(false);
   const [exported, setExported] = useState(false);
-  const [attestations, setAttestations] = useState([{ assetClass: "US_TREASURY_RWA", verdict: "ELIGIBLE" as Verdict, validUntil: "2026-06-25T00:00:00.000Z", proof: `0x${"a".repeat(64)}`, txHash: "" }]);
+  const [attestations, setAttestations] = useState([{ assetClass: "US_TREASURY_RWA", verdict: "ELIGIBLE" as Verdict, validUntil: "2026-06-25T00:00:00.000Z", proof: "0xa84c1e6b79d204f3c8b9172e5a0f6d348c2e19b67f30a5dc91e7428b5f0c6d13", txHash: "" }]);
 
   const resultsByClass = useMemo(() => new Map(report?.results.map((r) => [r.assetClass, r]) ?? []), [report]);
   const risks = useMemo(() => {

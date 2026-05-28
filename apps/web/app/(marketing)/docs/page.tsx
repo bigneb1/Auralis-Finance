@@ -1,13 +1,4 @@
-import Link from "next/link";
-import { Card, CardContent } from "@auralis/ui";
+import { ArrowRight } from "lucide-react";
+import { Card, PageHero } from "../../../components/marketing";
 
-const docs = [
-  ["Judge Guide", "https://github.com/talk2francis/Auralis-Finance/blob/main/docs/JUDGE_GUIDE.md", "The fastest 5-minute and 15-minute demo paths."],
-  ["Tutorial", "https://github.com/talk2francis/Auralis-Finance/blob/main/docs/TUTORIAL.md", "Step-by-step USDY closed-loop walkthrough."],
-  ["API", "https://github.com/talk2francis/Auralis-Finance/blob/main/docs/API.md", "Public endpoints, schemas, examples, and rate limits."],
-  ["Security", "https://github.com/talk2francis/Auralis-Finance/blob/main/docs/SECURITY.md", "Non-custodial rules, threat model, Slither notes."],
-  ["Contracts", "https://github.com/talk2francis/Auralis-Finance/blob/main/docs/CONTRACTS.md", "Mantle deployments, ABIs, and verification notes."],
-  ["Business Model", "https://github.com/talk2francis/Auralis-Finance/blob/main/docs/BUSINESS_MODEL.md", "Revenue lines and GTM plan."],
-];
-
-export default function Docs(){return <main className="mx-auto max-w-5xl px-4 py-16"><h1 className="font-display text-5xl">Docs</h1><p className="mt-4 text-[var(--text-secondary)]">Auralis documentation is written for judges, builders, treasury users, and protocol integrators.</p><div className="mt-8 grid gap-4 md:grid-cols-2">{docs.map(([title,href,body])=><Card key={title}><CardContent className="p-5"><h2 className="font-medium">{title}</h2><p className="mt-2 text-sm text-[var(--text-secondary)]">{body}</p><Link className="mt-4 inline-block text-sm text-[var(--teal)]" href={href}>Open document →</Link></CardContent></Card>)}</div><section className="mt-8 rounded-2xl border border-[var(--border)] p-5 text-sm text-[var(--text-secondary)]"><p>Core API endpoints: /api/ratings, /api/ratings/:assetId, /api/compliance/scan, /api/portfolio/:wallet, /api/simulate, /api/copilot, /api/verify/rating.</p></section></main>}
+export default function Docs(){const cards=["Judge Guide|The shortest path through Auralis for evaluators.","Architecture|How the pieces fit together.","Risk Methodology|The seven dimensions in detail.","Compliance Framework|How verdicts are formed.","Agent Design|ERC-8004 identity, skills, reputation.","Contracts|Mantle deployments and ABIs.","API|Intelligence API reference.","Security|Threat model and disclosure.","Deployment|Run locally or against testnet."]; return <main><PageHero eyebrow="Documentation" title="Build with Auralis.">Specs, references, and guides — start with the Judge Guide if you are here to evaluate.</PageHero><section className="mx-auto max-w-6xl px-4 pb-24"><div className="grid gap-4 md:grid-cols-3">{cards.map((raw,i)=>{const [t,sub]=raw.split("|"); return <Card key={t} className={`${i===0?"border-transparent bg-[var(--teal-wash)]":""}`}><div className="flex items-start justify-between gap-4"><div className="font-display text-xl">{t}</div><ArrowRight size={16} className="mt-1 text-[var(--text-secondary)]"/></div><div className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{sub}</div></Card>})}</div></section></main>}

@@ -1,20 +1,13 @@
-import { Card, CardContent } from "@auralis/ui";
+import { ChevronDown } from "lucide-react";
+import { PageHero } from "../../../components/marketing";
 
-const faqs = [
-  ["Is Auralis custodial?", "No. Auralis stores proofs and metadata, not funds. Users sign every transaction from their own wallet."],
-  ["Is this legal or financial advice?", "No. Auralis provides risk and compliance tooling for informed review. It is not legal, tax, investment, or financial advice."],
-  ["What chain is used?", "Mantle mainnet, chainId 5000, with deployed proof contracts for ratings, attestations, policies, and agent identity."],
-  ["What does AI do?", "AI explains ratings and proposals in plain language. Deterministic engines compute scores, policy checks, and compliance verdicts."],
-  ["Can the agent trade by itself?", "No. The agent proposes and simulates. Guarded execution still requires user signing."],
-  ["How does Auralis make money?", "The planned revenue lines are Intelligence API subscriptions, treasury monitoring tiers, and attestation mint fees."],
-];
-
-export default function FAQ() {
-  return <main className="mx-auto max-w-4xl px-4 py-16">
-    <h1 className="font-display text-5xl">FAQ</h1>
-    <p className="mt-4 text-[var(--text-secondary)]">The short version: Auralis is a non-custodial risk, compliance, and proof layer for Mantle RWAs.</p>
-    <section className="mt-8 space-y-3">
-      {faqs.map(([q, a]) => <Card key={q}><CardContent className="p-5"><h2 className="font-medium">{q}</h2><p className="mt-2 text-sm text-[var(--text-secondary)]">{a}</p></CardContent></Card>)}
-    </section>
-  </main>;
-}
+export default function FaqPage(){const items=[
+["What is Auralis?","Auralis is an AI agent that rates tokenized real-world assets, verifies whether your wallet may hold them, and manages a portfolio under hard guardrails — proving every decision on-chain."],
+["Is it custodial?","No. Auralis holds no funds and no keys. The user approves every action; the agent advises."],
+["Is this financial or legal advice?","No. Auralis provides risk information and compliance tooling. Use it to support your own decisions and due diligence."],
+["Which assets are supported?","At launch: USDY, QCDT, mETH, cmETH, USDe, MI4, Aave on Mantle, and Merchant Moe LPs."],
+["What does it cost?","Read access is free. The Intelligence API and premium treasury tier are paid. Attestation minting carries a small on-chain fee."],
+["How do compliance attestations work?","Auralis evaluates eligibility for your jurisdiction, you mint an attestation, and the result is anchored on Mantle. The attestation is portable."],
+["What is the Auralis Rating?","A composite 0–100 risk score and AAA–C letter grade across seven dimensions. Every rating is versioned and verifiable."],
+["What's on the roadmap?","More asset classes, deeper simulator scenarios, and a public Intelligence API."],
+]; return <main><PageHero eyebrow="Frequently asked" title="Questions, answered." narrow>Everything evaluators, treasury teams, and builders usually ask before opening the app.</PageHero><section className="mx-auto max-w-3xl px-4 pb-24"><div className="grid gap-2">{items.map(([q,a])=><details key={q} className="group rounded-[var(--radius-card)] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-soft)]"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-medium"><span>{q}</span><ChevronDown size={16} className="text-[var(--text-secondary)] transition group-open:rotate-180"/></summary><p className="px-5 pb-5 text-[15px] leading-7 text-[var(--text-secondary)]">{a}</p></details>)}</div></section></main>}
