@@ -41,6 +41,24 @@ export function MotionDonut({ percent, label = "allocation" }: { percent: number
   );
 }
 
+export function MotionSegmentDonut({ a, b, label = "target" }: { a: number; b: number; label?: string }) {
+  const reduce = useReducedMotion();
+  const safeA = Math.max(0, Math.min(100, a));
+  const safeB = Math.max(0, Math.min(100, b));
+  const gradient = `conic-gradient(var(--teal) 0 ${safeA}%, #1F58A8 ${safeA}% ${safeA + safeB}%, #8C97A8 ${safeA + safeB}% 100%)`;
+  return (
+    <motion.div
+      aria-label={`${label}: ${safeA}/${safeB}/${Math.max(0, 100 - safeA - safeB)}`}
+      className="grid h-36 w-36 place-items-center rounded-full"
+      initial={reduce ? false : { background: "conic-gradient(var(--teal) 0 0%, #1F58A8 0% 0%, #8C97A8 0% 100%)" }}
+      animate={{ background: gradient }}
+      transition={{ duration: reduce ? 0 : 0.22, ease: "easeOut" }}
+    >
+      <div className="grid h-24 w-24 place-items-center rounded-full bg-[var(--surface)] text-center"><span className="font-display text-xl">100%</span><span className="-mt-5 text-xs text-[var(--text-secondary)]">target</span></div>
+    </motion.div>
+  );
+}
+
 export function DrawOnBar({ value }: { value: number }) {
   const reduce = useReducedMotion();
   return <motion.div className="h-2 rounded-full bg-[var(--teal)]" initial={reduce ? false : { width: 0 }} animate={{ width: `${Math.max(0, Math.min(100, value))}%` }} transition={{ duration: reduce ? 0 : 0.2 }} />;
