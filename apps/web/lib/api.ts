@@ -33,12 +33,18 @@ export async function getRatings(): Promise<AssetRating[]> {
   await cacheSet("ratings:all:v1", ratings, 900);
   return ratings;
 }
-export async function getRating(assetId: string) { return (await getRatings()).find((r) => r.assetId === assetId || r.symbol.toLowerCase() === assetId.toLowerCase()); }
+export async function getRating(assetId: string) { return (await getRatings()).find((r) => r.assetId === assetId || r.assetId.split(":").pop() === assetId.toLowerCase() || r.symbol.toLowerCase() === assetId.toLowerCase()); }
 export async function getRatingWithAI(assetId: string) {
   const rating = await getRating(assetId);
   if (!rating) return null;
   const ai = await explainRating(rating);
-  return { ...rating, rationale: ai.result.rationale, counterfactual: ai.result.counterfactual, aiProvenance: ai.provenance };
+  const db = getServerDb();
+  let chain: Record<string, unknown> = {};
+  if (db) {
+    const { data } = await db.from("ratings").select("tx_hash,metadata_uri,anchored_at").eq("asset_id", rating.assetId).maybeSingle();
+    if (data) chain = { txHash: data.tx_hash, metadataUri: data.metadata_uri, anchoredAt: data.anchored_at };
+  }
+  return { ...rating, ...chain, ratingJson: rating, rationale: ai.result.rationale, counterfactual: ai.result.counterfactual, aiProvenance: ai.provenance };
 }
 export async function persist(table: string, row: Record<string, unknown>) {
   const db = getServerDb();

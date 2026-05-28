@@ -27,8 +27,14 @@ create table if not exists ratings (
   rating_json jsonb not null,
   rating_hash text not null unique,
   methodology_version integer not null,
+  tx_hash text,
+  metadata_uri text,
+  anchored_at timestamptz,
   updated_at timestamptz not null default now()
 );
+alter table ratings add column if not exists tx_hash text;
+alter table ratings add column if not exists metadata_uri text;
+alter table ratings add column if not exists anchored_at timestamptz;
 create index if not exists ratings_updated_at_idx on ratings(updated_at desc);
 
 create table if not exists compliance_reports (
@@ -36,8 +42,10 @@ create table if not exists compliance_reports (
   wallet text not null,
   report_json jsonb not null,
   check_hash text not null unique,
+  tx_hash text,
   created_at timestamptz default now()
 );
+alter table compliance_reports add column if not exists tx_hash text;
 create index if not exists compliance_reports_wallet_idx on compliance_reports(wallet, created_at desc);
 
 create table if not exists attestations (
