@@ -69,7 +69,7 @@ export function CopilotWidget() {
         </div>
         <p className="mt-3 border-t border-[var(--border)] pt-3 text-xs text-[var(--text-secondary)]">Advisory only. Auralis does not give legal or financial advice and never signs transactions for you.</p>
       </motion.section>}
-      <button aria-label="Open Auralis Copilot" onClick={() => setOpen((v) => !v)} className="rounded-full bg-[var(--ink)] px-4 py-3 text-sm font-medium text-white shadow-[var(--shadow-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--teal)]">Copilot</button>
+      <button aria-label="Open Auralis Copilot" onClick={() => setOpen((v) => !v)} className="rounded-full bg-[var(--ink-slab)] px-4 py-3 text-sm font-medium text-white shadow-[var(--shadow-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--teal)]">Copilot</button>
     </div>
   );
 }

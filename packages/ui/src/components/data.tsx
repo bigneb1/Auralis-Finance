@@ -1,6 +1,7 @@
 import { AlertTriangle, CheckCircle2, CircleDollarSign, XCircle } from "lucide-react";
 import { cn } from "../lib";
 import { Card, StatusPill } from "../primitives";
+import { CountUpValue } from "./count-up";
 
 type Verdict = "ELIGIBLE" | "RESTRICTED" | "DENIED" | "NOT_CHECKED";
 
@@ -17,7 +18,7 @@ export function EligibilityChip({ verdict }: { verdict: Verdict }) {
 
 export function KpiStat({ label, value, delta }: { label: string; value: string; delta?: string }) {
   const negative = delta?.trim().startsWith("-");
-  return <Card className="p-5"><div className="font-sans text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text-secondary)]">{label}</div><div className="mt-2 font-display text-[32px] font-normal leading-none tracking-[-0.01em] text-[var(--ink)]">{value}</div>{delta && <div className="mt-3"><StatusPill tone={negative ? "rose" : "emerald"}>{negative ? "↓" : "↑"} {delta.replace(/^[-+]/, "")}</StatusPill></div>}</Card>;
+  return <Card className="p-5"><div className="font-sans text-xs font-semibold uppercase tracking-[0.08em] text-[var(--text-secondary)]">{label}</div><div className="mt-2 font-display text-[32px] font-normal leading-none tracking-[-0.01em] text-[var(--ink)]"><CountUpValue value={value} /></div>{delta && <div className="mt-3"><StatusPill tone={negative ? "rose" : "emerald"}>{negative ? "↓" : "↑"} {delta.replace(/^[-+]/, "")}</StatusPill></div>}</Card>;
 }
 
 export function ConfidenceMeter({ value }: { value: number }) { const v = Math.max(0, Math.min(100, value)); return <div><div className="mb-1 flex justify-between text-xs"><span>Confidence</span><span>{v}%</span></div><div className="h-2 rounded-full bg-[var(--surface-muted)]"><div className="h-2 rounded-full bg-[var(--teal)]" style={{ width: `${v}%` }} /></div></div>; }

@@ -22,7 +22,7 @@ type UiState = "idle" | "loading" | "populated" | "empty" | "error" | "stale";
 const stateLabels: Record<UiState, string> = { idle: "Not checked", loading: "Scanning", populated: "Current", empty: "No report", error: "Error", stale: "Stale" };
 
 function verdictTone(verdict: Verdict) {
-  return verdict === "ELIGIBLE" ? "border-[var(--emerald)]/30 bg-emerald-50" : verdict === "DENIED" ? "border-[var(--rose)]/30 bg-red-50" : verdict === "RESTRICTED" ? "border-[var(--amber)]/30 bg-yellow-50" : "border-[var(--border)] bg-[var(--surface-muted)]";
+  return verdict === "ELIGIBLE" ? "border-[var(--emerald)]/30 bg-[var(--emerald-wash)]" : verdict === "DENIED" ? "border-[var(--rose)]/30 bg-[var(--rose-wash)]" : verdict === "RESTRICTED" ? "border-[var(--amber)]/30 bg-[var(--amber-wash)]" : "border-[var(--border)] bg-[var(--surface-muted)]";
 }
 
 export default function CompliancePage() {
@@ -84,7 +84,7 @@ export default function CompliancePage() {
   }
 
   return <div className="mx-auto max-w-7xl space-y-6">
-    <div className="rounded-[var(--radius-card)] border border-[var(--amber)]/30 bg-yellow-50 p-4 text-sm text-[var(--ink)] shadow-[var(--shadow-soft)]">Auralis provides compliance tooling and risk information, not legal advice.</div>
+    <div className="rounded-[var(--radius-card)] border border-[var(--amber)]/30 bg-[var(--amber-wash)] p-4 text-sm text-[var(--ink)] shadow-[var(--shadow-soft)]">Auralis provides compliance tooling and risk information, not legal advice.</div>
     <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"><div><p className="font-sans text-xs font-semibold uppercase tracking-[0.12em] text-[var(--teal)]">Eligibility workflow</p><h1 className="mt-3 font-display text-4xl">Compliance & Eligibility Agent</h1><p className="mt-2 text-[var(--text-secondary)]">Scan a wallet, map eligibility by asset class, export the compliance report, then mint a user-signed attestation.</p></div><div className="flex flex-wrap gap-2">{Object.entries(stateLabels).map(([key,label])=><StatusPill key={key} status={status===key ? "operational" : "pending"}>{label}</StatusPill>)}</div></div>
     <div className="inline-flex flex-wrap rounded-[12px] border border-[var(--border)] bg-[var(--surface-muted)] p-1 shadow-[var(--shadow-soft)]">{tabs.map((t)=><button key={t} onClick={()=>setTab(t)} className={`rounded-[10px] px-4 py-2 text-sm font-medium transition ${tab===t ? "bg-[var(--surface)] text-[var(--teal)] shadow-[var(--shadow-soft)]" : "text-[var(--text-secondary)] hover:text-[var(--ink)]"}`}>{t}</button>)}</div>
 

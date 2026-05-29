@@ -17,6 +17,13 @@
   --text-tertiary: #8C97A8;
   --border-strong: #D5D8D2;
 
+  /* Always-dark slab (footer, primary CTA sections) — stays dark in both themes. */
+  --ink-slab: #0B1220;
+  /* Semantic status washes (replace hardcoded bg-*-50 so they adapt to dark). */
+  --emerald-wash: #E7F6EC;
+  --amber-wash: #FBF3E2;
+  --rose-wash: #FBEAEC;
+
   --font-display: var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
   --font-ui: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-mono: var(--font-geist-mono), "Geist Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -29,4 +36,36 @@
   --shadow-soft: 0 1px 2px rgba(11,18,32,0.04), 0 4px 12px rgba(11,18,32,0.06);
   --shadow: var(--shadow-soft);
   --hairline: 1px solid var(--border);
+
+  color-scheme: light;
+}
+
+/* Dark mode — Claude-style: navy ink as the page background, warm off-white
+   text, teal accent preserved. Applied via data-theme="dark" on <html>. */
+:root[data-theme="dark"] {
+  --ink: #ECE7DC;            /* warm off-white — primary text */
+  --paper: #0B1220;          /* page background */
+  --surface: #131C2E;        /* card surface */
+  --surface-muted: #1A2336;  /* muted surface / hover */
+  --border: #29344A;
+  --border-strong: #3A4863;
+  --text-secondary: #9AA6B8;
+  --text-tertiary: #76849A;
+  --text: var(--ink);
+
+  --teal: #2BBBA6;           /* brightened for contrast on dark */
+  --teal-wash: #0F332E;
+  --emerald: #3CC178;
+  --amber: #E3A23F;
+  --rose: #EC6671;
+  --brass: #C79B5A;
+
+  --emerald-wash: #11311F;
+  --amber-wash: #34280F;
+  --rose-wash: #361519;
+
+  --ink-slab: #070C16;       /* keep footer/CTA dark in dark mode */
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.40);
+
+  color-scheme: dark;
 }

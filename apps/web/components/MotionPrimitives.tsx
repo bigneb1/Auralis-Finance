@@ -1,12 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export function RouteTransition({ children }: { children: React.ReactNode }) {
   const reduce = useReducedMotion();
+  const pathname = usePathname();
   return (
     <motion.div
+      key={pathname}
       initial={reduce ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: reduce ? 0 : 0.2, ease: "easeOut" }}
@@ -19,9 +22,13 @@ export function RouteTransition({ children }: { children: React.ReactNode }) {
 export function CountUp({ value }: { value: string }) {
   const number = Number(value.replace(/[^0-9.]/g, ""));
   const reduce = useReducedMotion();
-  const spring = useSpring(reduce || Number.isNaN(number) ? number : 0, { stiffness: 70, damping: 22 });
-  const display = useTransform(spring, (latest) => value.replace(number.toString(), formatLike(value, latest)));
-  useEffect(() => { spring.set(Number.isNaN(number) ? 0 : number); }, [number, spring]);
+  const mv = useMotionValue(reduce || Number.isNaN(number) ? number : 0);
+  const display = useTransform(mv, (latest) => value.replace(number.toString(), formatLike(value, latest)));
+  useEffect(() => {
+    if (reduce || Number.isNaN(number)) { mv.set(Number.isNaN(number) ? 0 : number); return; }
+    const controls = animate(mv, number, { duration: 0.6, ease: "easeOut" });
+    return () => controls.stop();
+  }, [number, reduce, mv]);
   if (Number.isNaN(number)) return <>{value}</>;
   return <motion.span>{display}</motion.span>;
 }
