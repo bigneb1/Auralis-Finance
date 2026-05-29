@@ -67,7 +67,10 @@ export default function AppHome() {
 
   useEffect(() => {
     if (!walletAddress) return;
-    void fetch(`/api/users/${walletAddress}`).then((res) => res.json()).then(({ user }) => { if (user?.onboardingDone) router.replace("/app/dashboard"); }).catch(() => undefined);
+    void fetch(`/api/users/${walletAddress}`).then((res) => res.json()).then(({ user }) => {
+      console.log("[onboarding] mount check, onboarding_done (from DB) =", user?.onboardingDone);
+      if (user?.onboardingDone) { console.log("[onboarding] already complete -> /app/dashboard"); router.replace("/app/dashboard"); }
+    }).catch(() => undefined);
   }, [router, walletAddress]);
 
   function pickConnector(id: WalletId): Connector | undefined {
@@ -123,10 +126,20 @@ export default function AppHome() {
       const res = await fetch("/api/compliance/scan", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ wallet: walletAddress, jurisdiction: "NG" }) });
       if (!res.ok) throw new Error(`Compliance scan failed: ${res.status}`);
       await res.json();
+      console.log("[onboarding] step5 scan resolved OK for", walletAddress);
       setScanPct(100);
-      await persistUser({ onboardingDone: true, jurisdiction: "NG" });
-      router.replace("/app/dashboard");
+      // Persist the FULL configuration + onboarding_done in one awaited write.
+      // Do not navigate optimistically — verify the row actually came back with
+      // onboarding_done=true before routing, otherwise the dashboard guard bounces back.
+      const saveRes = await fetch(`/api/users/${walletAddress}`, { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ walletAddress, chainId: liveChainId, jurisdiction: "NG", mode, riskProfile: risk, maxDrawdown: drawdown, liquidity: liq, onboardingDone: true }) });
+      if (!saveRes.ok) throw new Error(`Saving your profile failed: ${saveRes.status}`);
+      const saved = await saveRes.json();
+      console.log("[onboarding] step5 DB write resolved, onboardingDone =", saved?.user?.onboardingDone, "· storage =", saved?.storage);
+      if (!saved?.user?.onboardingDone) throw new Error("Could not save onboarding state. Confirm Supabase is configured (SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY).");
+      console.log("[onboarding] step5 navigating to /app/dashboard");
+      router.push("/app/dashboard");
     } catch (error) {
+      console.error("[onboarding] step5 failed:", error);
       setScanMessage(error instanceof Error ? error.message : "Compliance scan failed.");
       setScanning(false);
     }
