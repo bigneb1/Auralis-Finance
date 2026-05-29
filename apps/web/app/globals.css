@@ -81,6 +81,11 @@ button, a, input, textarea, select {
 .auralis-slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgba(14,158,140,0.2), 0 0 0 7px rgba(14,158,140,0.12); }
 .auralis-slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 5px rgba(14,158,140,0.2), 0 0 0 7px rgba(14,158,140,0.12); }
 
+/* Theme-aware brand logo swap (keyed on the manual data-theme toggle). */
+.logo-on-dark { display: none; }
+[data-theme="dark"] .logo-on-light { display: none; }
+[data-theme="dark"] .logo-on-dark { display: inline-block; }
+
 .auralis-chart-line {
   stroke-dasharray: 420;
   stroke-dashoffset: 420;
