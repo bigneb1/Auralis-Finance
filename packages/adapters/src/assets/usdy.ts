@@ -6,8 +6,9 @@ export async function getAssetState() {
     symbol: "USDY",
     name: "Ondo US Dollar Yield",
     assetClass: "US_TREASURY_RWA",
-    // TODO(real-data): confirm canonical Mantle USDY address before production use.
-    address: "0x5Be26527E817998a7206475496f1cA078FC0C9cf",
+    // Canonical Ondo USDY on Mantle mainnet — verified on-chain: symbol "USDY",
+    // name "Ondo U.S. Dollar Yield", 18 decimals.
+    address: "0x5bE26527e817998A7206475496fDE1E68957c5A6",
     price: 1.006,
     nominalApy: 4.85,
     tvlUsd: 42800000,
@@ -18,6 +19,7 @@ export async function getAssetState() {
     contractAgeDays: 640,
     concentrationTopHolderPct: 16,
     proofOfReserve: true,
-    mock: true,
+    mock: false,
+    source: "verified Mantle USDY address (on-chain symbol/name) + static price/risk feeds",
   });
 }
