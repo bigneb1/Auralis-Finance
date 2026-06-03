@@ -42,7 +42,7 @@ The full USDY path was executed end-to-end with a **user-signed wallet** (not a 
 | `setPolicy` (USDY guardrails) | `checkRebalance` → **PASS** | [`0x4801a3…f29de9`](https://explorer.mantle.xyz/tx/0x4801a3d2b62ad8543f40d640d6258e9eb7b536733ab4398efe4eb51c6cf29de9) |
 | `tryExecuteRebalance` | `RebalanceExecuted` emitted | [`0xd4882c…a8460d`](https://explorer.mantle.xyz/tx/0xd4882cd832e7d143aca413d74479154725ab0f11350b71c67323eddefea8460d) |
 
-The canonical USDY rating hash is **deterministic**, so anyone can recompute it and verify it against `AuralisRatingRegistry.verifyRating` on-chain.
+The Auralis rating and its AI-generated rationale hash, plus the compliance eligibility verdict, are committed on-chain via `anchorRating` and `mintAttestation` — the intelligence layer's output is written to Mantle as a verifiable proof
 
 ## Deployed contracts
 
