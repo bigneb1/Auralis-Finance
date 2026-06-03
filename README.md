@@ -144,7 +144,7 @@ Sourcify                     all four mainnet contracts: full match
 ## Submission links
 
 - **Live demo:** https://auralisfinance.xyz
-- **Demo video:** _add link_
+- **Demo video:** https://youtu.be/W1bP9XXYfDw?si=N2dXv65fBLo9UP68
 - **X / Twitter thread:** _add link_
 - **Network:** Mantle mainnet (chainId 5000)
 
